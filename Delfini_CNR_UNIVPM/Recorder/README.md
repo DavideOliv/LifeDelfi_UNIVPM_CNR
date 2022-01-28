@@ -24,6 +24,8 @@ reboot again and test.
 To test usage of SOX software is recommended.
 Sox is a set of tools to create/modify/convert sound files. We often use it as a simple sine-wave generator.
 > sudo apt install sox
+
 Then play an 1kHz sine test tone using the command
+
 > play -n synth sine 1000
 
