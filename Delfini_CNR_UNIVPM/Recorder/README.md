@@ -3,12 +3,15 @@ This script will start recording using given audio card.
 ## Required
 1) Modify /boot/config.txt
 > comment out line dtparam=audio=on
+
 reboot
 
 ### Test configuration
 Type in shell:
 > aplay -l
+
 and
+
 > arecord -l
 
 expected result:
@@ -18,6 +21,8 @@ expected result:
 
 if not add to /boot/config.txt the device tree overlay conf for your hifiberry
 > dtoverlay=hifiberry-dacplusadcpro
+
+
 reboot again and test.
 
 ## Testing audio card
