@@ -2,18 +2,17 @@
 
 # Check audio card
 audiocard=$(arecord -l)
-expected="ALC295" # change with your audiocard
-[[ $audiocard =~ (^|[[:space:]])$expected($|[[:space:]]) ]] && echo "Using $expected audio input" || return
+expected="snd_rpi_hifiberry_dacplusadcpro" # change with your audiocard
+[[ $audiocard =~ $expected ]] && echo "Using $expected audio input" || ( echo "Audio card: $expected not found" ; exit )
 
 # Check USB device
-homedir="/media"
-usbdevices=$(ls $homedir)
+homedir="/media/pi/"
+usbdevices=$(ls -l $homedir | grep -c ^d)
 
-if [ ${#usbdevices[@]} -eq 0 ]; then
-    echo "No USB devices detected"
-    return
+if [ $usbdevices -eq 0 ]; then
+  echo "No USB devices detected"; exit 
 fi
-
+usbdevices=$(ls $homedir)
 echo "Using $homedir/${usbdevices[0]} as storage"
 
 # Get counter of acquisition
