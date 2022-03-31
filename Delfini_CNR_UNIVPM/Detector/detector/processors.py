@@ -8,10 +8,10 @@ class Processor:
     def addLayer(self, layer : Layer):
         self.layers.append(layer)
 
-    def check(self, chunk : np.ndarray):
+    def check(self, chunk : np.ndarray, offset : float):
         data = chunk
         result = False
-        data_dict = dict()
+        data_dict = {"offset" : offset}
         for layer in self.layers:
             result, data, props = layer.process(data)
             data_dict.update(props)

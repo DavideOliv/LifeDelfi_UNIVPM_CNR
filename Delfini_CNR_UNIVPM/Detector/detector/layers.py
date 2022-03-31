@@ -54,9 +54,13 @@ class PeaksLayer(Layer):
         props = {
             "peak_num": peaks.shape[0],
             "peak_true": result,
-            "peak_offsets": peaks,
-            "peak_heigths": peak_props["peak_heights"]
+            "peak_height_max": None,
+            "peak_height_min": None,
         }
+
+        if peaks.shape[0]>0:
+            props["peak_height_max"] = np.max(peak_props["peak_heights"])
+            props["peak_height_min"] = np.min(peak_props["peak_heights"])
 
         return result, peaks, props
 

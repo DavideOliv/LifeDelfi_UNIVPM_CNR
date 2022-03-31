@@ -41,13 +41,13 @@ class WAVFileDataSource(DataSource):
         self.delay_sec = delay_sec
         self.offset = 0
     
-    def getChunk(self) -> np.ndarray:
+    def getChunk(self) -> tuple[np.ndarray, float]:
         oldoffset = self.offset
         self.offset += self.n_samples
         if self.delay_sec > 0:
             time.sleep(self.delay_sec)  #simula delay campionamento
         chunk = self.wavfile[oldoffset:self.offset]
         if chunk.shape[0] != self.n_samples:
-            return None
+            return None, None
         else:
-            return chunk
+            return chunk, oldoffset/self.sr

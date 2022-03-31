@@ -10,4 +10,4 @@ class DataManager:
 
     def export_csv(self):
         df = pd.DataFrame.from_records(self.records)
-        df.to_csv(self.filename)
+        df.to_csv(self.filename, index_label="index", float_format="%.2f")

@@ -18,7 +18,7 @@ class OverwritingPipeline(Pipeline):
 
     def get(self):
         if self.end_flag:
-            return None
+            return (None, None)
         else:
             self.ready.acquire()
             return self.data
@@ -42,7 +42,7 @@ class FIFOPipeline(Pipeline):
 
     def get(self):
         if self.end_flag and len(self.data) == 0:
-            return None
+            return (None, None)
         self.ready.acquire()
         return self.data.pop(0)
 

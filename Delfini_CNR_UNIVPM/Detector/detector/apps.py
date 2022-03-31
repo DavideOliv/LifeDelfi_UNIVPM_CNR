@@ -28,9 +28,9 @@ class App:
 
     def check_task(self):
         while True:
-            chunk = self.pl.get()
+            chunk, offset = self.pl.get()
             if chunk is not None:
-                result, data_dict = self.pr.check(chunk)
+                result, data_dict = self.pr.check(chunk, offset)
                 self.dm.addRecord(data_dict)
             else:
                 break
@@ -39,12 +39,12 @@ class App:
 
     def fetch_task(self):
         while True:
-            samples = self.ds.getChunk()
+            samples, offset = self.ds.getChunk()
             if samples is None:
                 self.pl.end()
                 break
             else:
-                self.pl.set(samples)
+                self.pl.set((samples, offset))
 
 
 class OfflineDetectorApp(App):
