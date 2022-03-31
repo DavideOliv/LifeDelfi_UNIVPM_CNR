@@ -1,4 +1,4 @@
-from detector.app import offlineDetector
+from detector.apps import OfflineDetectorApp
 from glob import glob
 import os
 
@@ -7,4 +7,4 @@ if __name__ == "__main__":
     path = input("Enter path to wav files: ")
     for filename in glob(os.path.join(path,"*.wav")):
         print(filename)
-        offlineDetector(filename)
+        OfflineDetectorApp(filename).run()
