@@ -58,7 +58,7 @@ class OfflineDetectorApp(App):
         pr.addLayer(FilterLayer("highpass", 30e3, SR))
         pr.addLayer(PeaksLayer(5, 50e-3*SR, 5*SECONDS))
         pr.addLayer(PeaksVarianceLayer(1000, 0.05))
-        dm = DataManager(
+        dm = CSVDataManager(
             filename + ".csv", {"filename": filename, "datetime": filename[:15], "chunkLength": SECONDS})
 
         super().__init__(ds, pl, pr, dm)
@@ -73,7 +73,7 @@ class SQLiteOfflineDetectorApp(App):
         pr.addLayer(FilterLayer("highpass", 30e3, SR))
         pr.addLayer(PeaksLayer(5, 50e-3*SR, 5*SECONDS))
         pr.addLayer(PeaksVarianceLayer(1000, 0.05))
-        dm = SQLiteDataManager("detector.db", {
+        dm = SQLiteDataManager("offline.db", {
                                "filename": filename, "datetime": filename[:15], "chunkLength": SECONDS})
 
         super().__init__(ds, pl, pr, dm)
@@ -89,8 +89,8 @@ class FakeOnlineDetectorApp(App):
         pr.addLayer(FilterLayer("highpass", 30e3, SR))
         pr.addLayer(PeaksLayer(5, 50e-3*SR, 5*SECONDS))
         pr.addLayer(PeaksVarianceLayer(1000, 0.05))
-        dm = DataManager(
-            filename + ".csv", {"filename": filename, "datetime": filename[:15], "chunkLength": SECONDS})
+        dm = SQLiteDataManager(
+            "fakeonline.db", {"filename": filename, "datetime": filename[:15], "chunkLength": SECONDS})
 
         super().__init__(ds, pl, pr, dm)
 
@@ -105,7 +105,7 @@ class OnlineDetectorApp(App):
         pr.addLayer(FilterLayer("highpass", 30e3, SR))
         pr.addLayer(PeaksLayer(5, 50e-3*SR, 5*SECONDS))
         pr.addLayer(PeaksVarianceLayer(1000, 0.05))
-        dm = DataManager(
-            filename + ".csv", {"filename": "arecord", "datetime": datetime.datetime.now().strftime("%Y%m%d%H%M%S"), "chunkLength": SECONDS})
+        dm = SQLiteDataManager(
+            "realtime.db", {"filename": "arecord", "datetime": datetime.datetime.now().strftime("%Y%m%d%H%M%S"), "chunkLength": SECONDS})
 
         super().__init__(ds, pl, pr, dm)
