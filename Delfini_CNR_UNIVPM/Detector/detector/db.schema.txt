@@ -7,5 +7,6 @@ blockLength REAL,                          # lunghezza del blocco salvato, in se
 classification TEXT,                       # classificazione (click, pinger, scandaglio, altro)
 nPeaks INTEGER,                            # numero di picchi contenuti nel blocco
 level REAL,                                # livello RMS del picco maggiore
+action TEXT,                               # Azione intrapresa dall'algoritmo
 statisticsJson BLOB,                       # alcuni eventuali dati statistici in formato JSON
 wave BLOB);                                # il frammento in formato wave
