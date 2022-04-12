@@ -8,7 +8,7 @@ class DataSource:
     SAMPLE_BYTESIZE = np.dtype(SAMPLE_TYPE).itemsize
 
     # Metodo da overridare nelle sottoclassi
-    def getChunk(self, n_samples: int) -> np.ndarray:
+    def getChunk(self) -> np.ndarray:
         raise NotImplementedError()
 
 
