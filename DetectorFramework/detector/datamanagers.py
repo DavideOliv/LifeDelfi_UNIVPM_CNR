@@ -35,7 +35,8 @@ class SQLiteDataManager(DataManager):
         "statisticsJson",
         "wave"
     ]
-    def __init__(self, filename, global_props={}):
+    def __init__(self, filename, global_props={}, save_wave=False):
+        self.save_wave = save_wave
         self.global_props = global_props
         self.conn = sqlite3.connect(filename, check_same_thread=False)
         self.cursor = self.conn.cursor()
@@ -62,6 +63,9 @@ class SQLiteDataManager(DataManager):
         for c in self.columns:
             if c not in record.keys():
                 record[c] = None
+
+        if not self.save_wave:
+            record["wave"] = None
         
         self.cursor.execute("""
             INSERT INTO detections(filename, datetime, offset, chunkLength, classification, nPeaks, levelMax, levelMin, action, filterJson, statisticsJson, wave)
