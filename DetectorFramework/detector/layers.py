@@ -37,7 +37,7 @@ class FilterLayer(Layer):
             })
         }
 
-    def process(self, data: np.ndarray) -> tuple[bool, np.ndarray, dict]:
+    def process(self, data: np.ndarray):
         return True, sg.sosfilt(self.filter, data), self.props
 
 
