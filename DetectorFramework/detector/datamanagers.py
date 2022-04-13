@@ -64,7 +64,7 @@ class SQLiteDataManager(DataManager):
             if c not in record.keys():
                 record[c] = None
 
-        if not self.save_wave:
+        if not (self.save_wave and record["action"]=="True"):
             record["wave"] = None
         
         self.cursor.execute("""
