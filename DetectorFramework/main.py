@@ -1,4 +1,4 @@
-from detector.apps import SQLiteOfflineDetectorApp
+from detector.exampleapps import SQLiteOfflineDetectorApp
 from glob import glob
 import os
 import sys

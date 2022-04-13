@@ -21,7 +21,7 @@ class ARecordDataSource(DataSource):
         self.process = subprocess.Popen(
             f'arecord -f S{SAMPLE_BITSIZE}_LE -r {sr} -c 1 -t raw', stdout=subprocess.PIPE, shell=True)
 
-    def getChunk(self) -> np.ndarray:
+    def getChunk(self):
         n_bytes = self.SAMPLE_BYTESIZE * self.n_samples
         byte_chunk = self.process.stdout.read(n_bytes)
         assert len(byte_chunk) == n_bytes
@@ -43,7 +43,7 @@ class WAVFileDataSource(DataSource):
         self.delay_sec = delay_sec
         self.offset = 0
     
-    def getChunk(self) -> tuple[np.ndarray, float]:
+    def getChunk(self):
         oldoffset = self.offset
         self.offset += self.n_samples
         if self.delay_sec > 0:

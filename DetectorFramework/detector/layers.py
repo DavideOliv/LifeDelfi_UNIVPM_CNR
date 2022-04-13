@@ -50,7 +50,7 @@ class PeaksLayer(Layer):
         self.distance = distance
         self.min_num_peaks = min_num_peaks
 
-    def process(self, data: np.ndarray) -> tuple[bool, np.ndarray, dict]:
+    def process(self, data: np.ndarray):
         ss = data - np.mean(data)
         nn = np.sqrt(np.mean(np.square(ss)))
         snr = np.abs(ss) / nn
