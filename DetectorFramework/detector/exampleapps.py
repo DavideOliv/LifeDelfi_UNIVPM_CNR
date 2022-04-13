@@ -36,8 +36,7 @@ class SQLiteOfflineDetectorApp(App):
         pr.addLayer(FilterLayer("highpass", 30e3, SR))
         pr.addLayer(PeaksLayer(5, 50e-3*SR, 5*SECONDS))
         pr.addLayer(PeaksVarianceLayer(1000, 0.05))
-        dm = SQLiteDataManager("offline.db", {
-                               "filename": os.path.basename(filename), "datetime": os.path.basename(filename)[:15], "chunkLength": SECONDS}
+        dm = SQLiteDataManager("offline.db", {"filename": os.path.basename(filename), "datetime": os.path.basename(filename)[:15], "chunkLength": SECONDS},
                                save_wave=True)
 
         super().__init__(ds, pl, pr, dm)
@@ -75,7 +74,7 @@ class OnlineDetectorApp(App):
         pr.addLayer(PeaksVarianceLayer(1000, 0.05))
         dm = SQLiteDataManager(
             "realtime.db", {"filename": "arecord", "datetime": datetime.datetime.now(
-            ).strftime("%Y%m%d%H%M%S"), "chunkLength": SECONDS}
+            ).strftime("%Y%m%d%H%M%S"), "chunkLength": SECONDS},
             save_wave=True)
 
         super().__init__(ds, pl, pr, dm)
