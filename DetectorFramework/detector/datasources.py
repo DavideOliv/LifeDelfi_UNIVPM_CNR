@@ -78,4 +78,4 @@ class JackDataSource(DataSource):
             return None, None
         chunk = np.frombuffer(s.recv(self.blocksize), dtype=np.float32)
         self.i += 1
-        return chunk, {"offset":self.i/self.samplerate, "wave": chunk}
+        return chunk, {"offset":self.i/self.samplerate, "wave": chunk, "chunkLength": self.nframes}

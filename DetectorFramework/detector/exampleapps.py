@@ -78,3 +78,20 @@ class OnlineDetectorApp(App):
             save_wave=True)
 
         super().__init__(ds, pl, pr, dm)
+
+class JackOnlineDetectorApp(App):
+    """Processa audio acquisito in tempo reale attraverso jack"""
+
+    def __init__(self):
+        pl = OverwritingPipeline()
+        ds = JackDataSource()
+        pr = Processor()
+        pr.addLayer(FilterLayer("highpass", 30e3, 192000))
+        pr.addLayer(PeaksLayer(5, 50e-3*192000, 5*1))
+        pr.addLayer(PeaksVarianceLayer(1000, 0.05))
+        dm = SQLiteDataManager(
+            "realtime.db", {"filename": "jack", "datetime": datetime.datetime.now(
+            ).strftime("%Y%m%d%H%M%S")},
+            save_wave=True)
+        
+        super().__init__(ds, pl, pr, dm)
